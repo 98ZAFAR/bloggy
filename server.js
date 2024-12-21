@@ -6,6 +6,8 @@ const express = require('express');
 const app = express();
 
 const userRoute = require('./routes/userRoute');
+const cookieParser = require('cookie-parser');
+const checkForAuthentication = require('./middleware/authentication');
 
 const PORT = process.env.PORT||8001;
 
@@ -17,8 +19,13 @@ app.set("views", path.resolve("./views"));
 app.use(express.urlencoded({extended:false}));
 app.use('/user',userRoute);
 
+app.use(cookieParser());
+app.use(checkForAuthentication("token"));
+
 app.get('/', (req, res)=>{
-    return res.render('home');
+    return res.render('home', {
+        user:req.user,
+    });
 })
 
 app.listen(PORT, ()=>{

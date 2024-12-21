@@ -12,24 +12,41 @@ router.get('/signup', (req, res)=>{
 })
 
 router.post('/signin', async(req, res)=>{
-    const {email, password} = req.body;
+    try {
+        const {email, password} = req.body;
 
-    const user = await User.validatePassword(email, password);
-    console.log(user);
-    
-    return res.redirect('/');
+        const token = await User.validatePasswordAndGenerateToken(email, password);
+        console.log(token);
+        
+        res.cookie('token', token);
+        return res.redirect('/');
+    } catch (error) {
+        return res.render('signin', {
+            error:"Invalid Email or Password!",
+        })
+    }
 })
 
 router.post('/signup', async(req, res)=>{
-    const {fullName, email, password} = req.body;
-    if(!fullName||!email||!password) return res.redirect('/user/signup');
-    await User.create({
-        fullName,
-        email,
-        password
-    });
+    try{
+        const {fullName, email, password} = req.body;
+        if(!fullName||!email||!password) return res.redirect('/user/signup');
+        await User.create({
+            fullName,
+            email,
+            password
+        });
 
-    return res.redirect('/user/signin');
+        return res.redirect('/user/signin');
+    }catch(error){
+        return res.render('signup', {
+            error:"Something went wrong!",
+        })
+    }
+})
+
+router.get('/logout', (req, res)=>{
+    return res.clearCookie('token').redirect('/');
 })
 
 module.exports = router;
