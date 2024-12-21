@@ -5,6 +5,7 @@ const secret = process.env.SECRET;
 const createToken = (user)=>{
     const payload = {
         _id:user._id,
+        fullName:user.fullName,
         email:user.email,
         role:user.role,
         profileImgUrl:user.profileImgUrl
