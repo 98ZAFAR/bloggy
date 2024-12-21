@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%-include('./partials/head')%>
+    <title>Homepage</title>
+</head>
+<body>
+    <%-include('./partials/nav')%>
+    <div class="container mt-3 mb-3">
+        <form action="/blog" method="post" enctype="multipart/form-data">
+            <div style="border: 1px solid rgb(66, 65, 65);" class="coverImg">
+                <input type="file" name="coverImg" id="coverImg">
+            </div>
+            <div class="mt-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" name="title" aria-describedby="emailHelp">
+            </div>
+            <div class="body mb-3">
+                <label for="floatingTextarea">Body</label>
+                <textarea class="form-control" id="body" name="body"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+    </div>
+    <%-include('./partials/script')%>
+</body>
+</html>

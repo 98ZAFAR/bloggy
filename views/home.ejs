@@ -7,9 +7,17 @@
 </head>
 <body>
     <%-include('./partials/nav')%>
-    <% if (locals.user) { %>
-        <%= JSON.stringify(locals.user) %>
-    <% } %>
+    <div class="container mt-5">
+        <% blogs.forEach(element => { %>
+            <div class="card" style="width: 18rem;">
+                <img src="<%=element.coverImgUrl%>" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><%=element.title%></h5>
+                  <a href="/blog/<%=element._id%>" class="btn btn-primary">View</a>
+                </div>
+              </div>
+        <% }) %>
+    </div>
     <%-include('./partials/script')%>
 </body>
 </html>
