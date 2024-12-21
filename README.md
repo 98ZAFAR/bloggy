@@ -1,1 +1,1 @@
-# bloggy
+# Blogging Project
