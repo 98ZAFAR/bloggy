@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%-include('./partials/head')%>
+    <title>Blog</title>
+</head>
+<body>
+    <%-include('./partials/nav')%>
+    <div class="container mt-3">
+        <p style="font-weight: 500; font-size: 2rem;"><%=blog.title%></p>
+        <img src="<%=blog.coverImgUrl%>"  width="750px" alt="">
+        <pre class="body mt-3"><%=blog.body%></pre>
+    </div>
+    <div class="container mt-3 mb-5">
+        <img src="<%=blog.createdBy.profileImgUrl%>" width="50px"> <%=blog.createdBy.fullName%>
+    </div>
+    <%-include('./partials/script')%>
+</body>
+</html>
