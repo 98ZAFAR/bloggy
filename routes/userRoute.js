@@ -16,7 +16,6 @@ router.post('/signin', async(req, res)=>{
         const {email, password} = req.body;
 
         const token = await User.validatePasswordAndGenerateToken(email, password);
-        console.log(token);
         
         res.cookie('token', token);
         return res.redirect('/');
